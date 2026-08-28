@@ -3,7 +3,7 @@
     "private": true,
     "version": "0.1.0",
     "type": "module",
-    "repository": "https://github.com/Perchusha/Portfolio_v2.git",
+    "repository": "https://github.com/Perchusha/portfolio.git",
     "author": "Anton Perch",
     "license": "MIT",
     "scripts": {

@@ -1,5 +1,7 @@
 # Portfolio
 
+Live: https://perchusha.github.io/portfolio/
+
 Minimal, dark-mode portfolio built with React, TypeScript, and Vite. Includes multilingual content, a mobile floating nav, and a contact form powered by Formspree.
 
 ## Features
