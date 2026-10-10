@@ -2,74 +2,36 @@
 
 Live: https://perchusha.github.io/portfolio/
 
-Minimal, dark-mode portfolio built with React, TypeScript, and Vite. Includes multilingual content, a mobile floating nav, and a contact form powered by Formspree.
+Single-page CV built with React, TypeScript, Vite and Tailwind CSS.
 
 ## Features
 
-- React + TypeScript + Vite
-- Tailwind CSS styling
-- 4 languages with quick switcher
-- Scroll-aware navigation
-- CV download + view links
-- Contact form via Formspree
+- Classic CV layout: about, experience, independent products, skills, personal (education, languages, interests, hobbies)
+- Print-ready: the print button (or `Ctrl+P`) produces a clean A4 CV, saved as "Anton Perch CV.pdf"
+- Light / dark theme (follows the system by default, remembered per browser)
+- Job durations and years of experience are computed from dates, so they never go stale
+- Keyboard shortcuts: `P` print, `T` theme
+- Copy-email button and a little hello for anyone who opens DevTools
 
 ## Getting started
 
-Install dependencies:
-
 ```bash
 yarn
-```
-
-Create `.env`:
-
-```bash
-cp .env.example .env
-```
-
-Run dev server:
-
-```bash
 yarn dev
 ```
 
-## Formspree setup
-
-Set your Formspree endpoint in `.env`:
-
-```
-VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-id
-```
-
-## Build
+## Scripts
 
 ```bash
-yarn build
-```
-
-## Format
-
-```bash
+yarn build   # type-check and build
+yarn lint
 yarn format
 ```
 
-## Lint
+## Editing content
 
-```bash
-yarn lint
-```
-
-## Project structure
-
-```
-src/
-  components/   # UI blocks
-  constants/    # content and config
-  types/        # shared types
-```
-
-## Notes
-
-- Update `src/constants/translations.ts` to edit content.
-- CV file lives in `public/Anton Perch CV.pdf`.
-- Favicon is `public/portfolio.ico`.
+- Page text: `src/constants/content.ts`
+- Job links and dates (for durations): `src/constants/jobs.ts`
+- Skill groups: `src/constants/skills.ts`
+- Contacts and social links: `src/constants/contacts.ts`
+- The downloadable CV lives in `public/Anton Perch CV.pdf`

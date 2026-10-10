@@ -1,4 +1,36 @@
-﻿@import "tailwindcss";
+@import 'tailwindcss';
+
+/* Dark styles apply on screen only, so printing from dark mode still gives black-on-white paper. */
+@custom-variant dark {
+  @media screen {
+    &:where(.dark, .dark *) {
+      @slot;
+    }
+  }
+}
+
+@theme {
+  --font-sans: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* One accent per theme: deep blue reads well on white, a soft pastel blue on near-black. */
+@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+}
+
+:root {
+  --accent: var(--color-blue-700);
+  --accent-soft: var(--color-blue-50);
+}
+
+@media screen {
+  .dark {
+    --accent: #9ec1f7;
+    --accent-soft: rgb(158 193 247 / 0.12);
+  }
+}
 
 @layer base {
   html {
@@ -7,15 +39,121 @@
 
   body {
     min-height: 100vh;
-    font-family: "Space Grotesk", "Plus Jakarta Sans", "Segoe UI", sans-serif;
-    letter-spacing: -0.01em;
-    background-color: #09090b;
-    color: #f4f4f5;
+    @apply bg-white font-sans text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
   }
 
   ::selection {
-    background-color: #f4f4f5;
-    color: #09090b;
+    @apply bg-blue-600 text-white;
+  }
+}
+
+.toast {
+  animation: toast-in 160ms ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px);
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
   }
 
+  html {
+    font-size: 10.5pt;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  .section-title {
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.15rem;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-color: #000;
+  }
+
+  .job-head,
+  .section-title {
+    break-after: avoid;
+  }
+
+  /* Skill pills collapse into "Group: a, b, c" lines, like a classic CV. */
+  .skills {
+    display: block;
+  }
+
+  .skill-group {
+    margin-bottom: 0.15rem;
+  }
+
+  .skill-title,
+  .skill-list {
+    display: inline;
+    font-size: 1rem;
+  }
+
+  .skill-title svg {
+    display: none;
+  }
+
+  .skill-title::after {
+    content: ': ';
+  }
+
+  .skill-tag {
+    display: inline;
+    padding: 0;
+    background: none !important;
+    font-size: 1rem;
+  }
+
+  .skill-tag:not(:last-child)::after {
+    content: ', ';
+  }
+
+  .projects {
+    display: block;
+  }
+
+  .personal > div {
+    break-inside: avoid;
+  }
+
+  /* Pills and hobby tiles in "Personal" print as a comma-separated line. */
+  .print-inline {
+    display: block;
+  }
+
+  .print-inline > * {
+    display: inline;
+    padding: 0;
+    font-size: 1rem;
+    background: none !important;
+  }
+
+  .print-inline > :not(:last-child)::after {
+    content: ', ';
+  }
+
+  .project-card {
+    margin-bottom: 0.5rem;
+    padding: 0;
+    background: none;
+    break-inside: avoid;
+  }
 }

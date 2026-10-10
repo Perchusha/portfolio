@@ -32,8 +32,6 @@ jobs:
 
       - name: Build
         run: yarn build
-        env:
-          VITE_FORMSPREE_ENDPOINT: ${{ secrets.VITE_FORMSPREE_ENDPOINT }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
