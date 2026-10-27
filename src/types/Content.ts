@@ -2,18 +2,11 @@ import type { IconName } from '../components/Icon'
 
 export type JobId = 'itsharkz' | 'dashbouquet' | 'xbsoftware' | 'travel'
 
-export type SkillGroupId =
-  | 'languages'
-  | 'web'
-  | 'security'
-  | 'testing'
-  | 'data'
-  | 'architecture'
-  | 'ai'
-  | 'also'
+export type SkillGroupId = 'core' | 'frontend' | 'backend' | 'testing' | 'security' | 'ai' | 'also'
 
 export type Hero = {
   role: string
+  focus: string
   location: string
   status: string
 }
@@ -62,6 +55,7 @@ export type Experience = {
   role: string
   period: string
   company: string
+  summary: string
   bullets: string[]
 }
 

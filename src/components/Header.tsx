@@ -61,7 +61,14 @@ function Header({ t, actions }: HeaderProps) {
         <h1 className="mb-1 text-3xl leading-tight font-bold text-zinc-900 md:text-4xl dark:text-white">
           Anton Perch
         </h1>
-        <h2 className="text-lg text-accent md:text-2xl">{t.hero.role}</h2>
+        <h2 className="text-lg text-accent md:text-2xl">
+          {t.hero.role}
+          {/* Phones put the focus on its own line rather than wrapping it mid-phrase. */}
+          <span className="block md:inline print:inline">
+            <span className="hidden md:inline print:inline"> · </span>
+            {t.hero.focus}
+          </span>
+        </h2>
       </div>
 
       <div className="md:col-span-2 md:col-start-2 md:self-start print:mt-1">

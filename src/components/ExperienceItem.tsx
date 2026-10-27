@@ -8,6 +8,18 @@ type ExperienceItemProps = {
   units: DurationUnits
 }
 
+// Bullets mark key phrases as **bold**, the way the PDF CV highlights them.
+const emphasize = (text: string) =>
+  text.split(/\*\*(.+?)\*\*/).map((part, index) =>
+    index % 2 ? (
+      <strong key={index} className="font-semibold text-zinc-900 dark:text-white">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  )
+
 function ExperienceItem({ job, units }: ExperienceItemProps) {
   const meta = jobs[job.id]
   const [company, location] = job.company.split(/, (.+)/)
@@ -29,7 +41,7 @@ function ExperienceItem({ job, units }: ExperienceItemProps) {
           </span>
         </div>
       </div>
-      <div className="mb-2 flex flex-wrap items-center justify-between gap-x-4 text-accent print:mb-1">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-x-4 text-accent">
         {meta.url ? (
           <a
             href={meta.url}
@@ -45,9 +57,12 @@ function ExperienceItem({ job, units }: ExperienceItemProps) {
         )}
         {location && <span className="text-sm text-zinc-600 dark:text-zinc-400">{location}</span>}
       </div>
+      <p className="mb-2 text-sm text-zinc-600 italic dark:text-zinc-400 print:mb-1">
+        {job.summary}
+      </p>
       <ul className="list-disc space-y-1 pl-5 text-zinc-800 marker:text-zinc-500 dark:text-zinc-300 print:space-y-0">
         {job.bullets.map((bullet) => (
-          <li key={bullet}>{bullet}</li>
+          <li key={bullet}>{emphasize(bullet)}</li>
         ))}
       </ul>
     </article>
